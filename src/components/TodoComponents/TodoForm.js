@@ -3,14 +3,14 @@ import React from "react";
 const TodoForm = props => {
   console.log(props);
   return (
-    <form onSumbit={props.addStudent}>
+    <form onSumbit={props.addTask}>
       <input
         name="task"
         placeholder="Name of task"
         value={props.task}
         onChange={props.changeHandler}
       />
-      <input
+      {/* <input
         name="id"
         placeholder="Time Stamp"
         value={props.id}
@@ -21,9 +21,10 @@ const TodoForm = props => {
         placeholder="false"
         value={props.completed}
         onChange={props.changeHandler}
-      />
+      /> */}
 
       <button type="submit">Add Todo</button>
+      <button onClick={props.clearItem}>Clear Completed</button>
     </form>
   );
 };
