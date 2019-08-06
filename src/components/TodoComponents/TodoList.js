@@ -3,15 +3,17 @@ import Todo from "./Todo";
 
 const TodoList = props => {
   return (
-    <div className="class-list">
-      {props.app.map(todo => (
+    <div className="todo-list">
+      {props.todos.map(todo => (
         <Todo 
-          todo={todo} 
-          task={todo.task} 
-          id={todo.id} 
-          completed={todo.completed} 
+          todo={todo}
+          key={todo.id} 
+          toggleTodo={props.toggleTodo} 
         />
       ))}
+      <button className="clear-btn" onClick={props.clearTodo}>
+        Clear Completed
+      </button>
     </div>
   );
 };

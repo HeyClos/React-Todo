@@ -21,10 +21,6 @@ class App extends React.Component {
     super();
     this.state = {
       todos
-      // app: todo,
-      // task: "",
-      // id: "",
-      // completed: "",
     };
   }
 
@@ -44,40 +40,40 @@ class App extends React.Component {
     })
   };
   
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+  // NAMING CONVENTION NOTE: todo is an object holding 3 properties. Not to be 
+  // confused with task, which is the name of the task within the todo object.
 
-  addTask = e => {
-    e.preventDefault();
+  addTodo = todoName => {
+    const newTodo = {
+      task: todoName,
+      id: Date.now(),
+      completed: false
+    };
     this.setState({
-      app: [
-        ...this.state.app,
-        {
-          task: this.state.task,
-          id: this.state.id,
-          completed: this.state.completed,
-        }
-      ],
-      task: "",
-      id: "",
-      completed: "",
-    });
-  };
+      todos: [...this.state.todos, newTodo]
+    })
+  }
 
+
+  clearTodo = () => {
+    this.setState ({
+      todos: this.state.todos.filter(todo => !todo.completed)
+    })
+  }
 
   render() {
     return (
       <div>
-        <TodoList app={this.state.app} />
+        <TodoList 
+          todos={this.state.todos}
+          toggleTodo={this.toggleTodo} 
+          clearTodo={this.clearTodo}
+        />
         <TodoForm 
           task={this.state.task}
           id={this.state.id}
           completed={this.state.completed}
-          addTask={this.addTask} 
-          changeHandler={this.changeHandler} 
+          addTodo={this.addTodo} 
         />
         {this.state.task}
       </div>
